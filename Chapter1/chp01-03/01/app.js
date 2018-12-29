@@ -1,11 +1,16 @@
+// Observerのコンストラクタを作成
+// listenersという配列を作成
 function Observer() {
   this.listeners = [];
 }
 
+// プロトタイプでonを定義。listenersという配列に関数を追加
 Observer.prototype.on = function(func) {
   this.listeners.push(func);
 };
 
+// プロトタイプでoffを定義。配列の中にある各要素の長さを取得し、
+// for文で繰り返し処理を行い、一致するものがあればlistenersから削除
 Observer.prototype.off = function(func) {
   var len = this.listener.length;
 
@@ -17,6 +22,8 @@ Observer.prototype.off = function(func) {
   }
 };
 
+// プロトタイプでtriggerを定義。
+// listenersに対して繰り返し処理を行う。
 Observer.prototype.trigger = function(event) {
   var len = this.listeners.length;
 
@@ -26,8 +33,9 @@ Observer.prototype.trigger = function(event) {
   }
 };
 
-var observer = new Observer();
-var greet = function () {
+
+let observer = new Observer();
+const greet = function () {
   console.log("Good morning");
 };
 observer.on(greet);

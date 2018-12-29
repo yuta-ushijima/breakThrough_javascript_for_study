@@ -1,8 +1,11 @@
 function Observer() {
+  // 複数イベントを通知させるために、空オブジェクトを定義
   this.listeners = {};
 }
 
 Observer.prototype.on = function(event, func) {
+  // listenersにeventという引数がなければ、空配列を返し、
+  // eventがあれば関数を追加する
   if (! this.listeners[event] ) {
     this.listeners[event] = [];
   }
@@ -10,7 +13,8 @@ Observer.prototype.on = function(event, func) {
 };
 
 Observer.prototype.off = function(event, func) {
-  var ref = this.listeners[event],
+  // event引数付きの配列listenersを参照する変数refを定義
+    var ref = this.listeners[event],
       len = ref.length;
   for (var i = 0; i < len; i++) {
     var listener = ref[i];
@@ -21,7 +25,8 @@ Observer.prototype.off = function(event, func) {
 };
 
 Observer.prototype.trigger = function(event) {
-  var ref = this.listeners[event];
+  // event引数付きの配列listenersを参照する変数refを定義
+    var ref = this.listeners[event];
   for (var i = 0, len = ref.length; i < len; i++) {
     var listener = ref[i];
     if(typeof listener === "function") listener();
